@@ -1,19 +1,19 @@
-package Planes;
+package planes;
 
 import models.ClassificationLevel;
 import models.ExperimentalTypes;
 
+import java.util.Objects;
+
 public class ExperimentalPlane extends Plane {
-    private final ExperimentalTypes type;
+    private ExperimentalTypes type;
     private ClassificationLevel classificationLevel;
-    private final String model;
 
     public ExperimentalPlane(String model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity,
                              ExperimentalTypes type, ClassificationLevel classificationLevel) {
         super(model, maxSpeed, maxFlightDistance, maxLoadCapacity);
         this.type = type;
         this.classificationLevel = classificationLevel;
-        this.model = model;
     }
 
     public ClassificationLevel getClassificationLevel() {
@@ -24,20 +24,32 @@ public class ExperimentalPlane extends Plane {
         this.classificationLevel = classificationLevel;
     }
 
+    public ExperimentalTypes getType() {
+        return type;
+    }
+
+    public void setType(ExperimentalTypes type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
-        return super.equals(o);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ExperimentalPlane plane = (ExperimentalPlane) o;
+        return type == plane.type && classificationLevel == plane.classificationLevel;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(super.hashCode(), type, classificationLevel);
     }
 
     @Override
     public String toString() {
-        return "experimentalPlane{" +
-                "model='" + model + '\'' +
-                '}';
+        return super.toString().replace("}", ", type=" + type +
+                ", classificationLevel=" + classificationLevel +
+                '}');
     }
 }

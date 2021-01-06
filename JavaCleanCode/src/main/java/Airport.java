@@ -1,17 +1,12 @@
-import Planes.ExperimentalPlane;
-import Planes.MilitaryPlane;
-import Planes.PassengerPlane;
-import Planes.Plane;
 import models.MilitaryType;
+import planes.ExperimentalPlane;
+import planes.MilitaryPlane;
+import planes.PassengerPlane;
+import planes.Plane;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-/**
- * @author Vitali Shulha
- * @version 1.1 4-Jan-2019
- */
 
 public class Airport {
     private final List<? extends Plane> planes;
