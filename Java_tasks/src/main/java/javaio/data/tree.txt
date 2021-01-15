@@ -1,5 +1,0 @@
-||--data
-|    numbers.txt
-|    reversed.txt
-|    TestClass.java
-|    tree.txt
