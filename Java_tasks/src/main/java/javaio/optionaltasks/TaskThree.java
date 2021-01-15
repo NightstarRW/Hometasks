@@ -19,6 +19,14 @@ public class TaskThree {
         if (!javaFile.isFile() || !javaFile.getName().endsWith(".java")) {
             throw new InvalidPathException(javaFilePath.toString(), "It's not a '.java' file");
         }
+        if (!new File("src/main/java/javaio/data").exists()) {
+            try {
+                Files.createDirectories(Paths.get("src/main/java/javaio/data"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Created a new directory: src\\main\\java\\javaio\\data");
+        }
         File reversedJavaContent = new File("src/main/java/javaio/data/reversed.txt");
         List<String> fileContent = new ArrayList<>();
         List<String> reversedFileContent = new ArrayList<>();

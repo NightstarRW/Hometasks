@@ -24,6 +24,10 @@ public class Tree {
             System.out.println("It's a directory path.");
             CustomFileVisitor customFileVisitor = new CustomFileVisitor(inputPath);
             Files.walkFileTree(inputPath, customFileVisitor);
+            if (!new File("src/main/java/javaio/data").exists()) {
+                Files.createDirectories(Paths.get("src/main/java/javaio/data"));
+                System.out.println("Created a new directory: src\\main\\java\\javaio\\data");
+            }
             File outputResult = new File("src/main/java/javaio/data" + File.separator + "tree.txt");
 
             try (FileWriter fileWriter = new FileWriter(outputResult)) {

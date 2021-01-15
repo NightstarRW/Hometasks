@@ -1,6 +1,8 @@
 package javaio.optionaltasks;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +12,14 @@ public class TaskOne {
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
+        if (!new File("src/main/java/javaio/data").exists()) {
+            try {
+                Files.createDirectories(Paths.get("src/main/java/javaio/data"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Created a new directory: src\\main\\java\\javaio\\data");
+        }
         File numbersFile = new File("src/main/java/javaio/data" + File.separator + "numbers.txt");
         try {
             if (numbersFile.createNewFile()) {
