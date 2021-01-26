@@ -4,20 +4,20 @@ import java.util.List;
 import java.util.Objects;
 
 public class Faculty {
-    private FacultyNames facultyName;
+    private FacultyNames name;
     private List<Group> groups;
 
-    public Faculty(FacultyNames facultyName, List<Group> groups) {
-        this.facultyName = facultyName;
+    public Faculty(FacultyNames name, List<Group> groups) {
+        this.name = name;
         this.groups = groups;
     }
 
-    public FacultyNames getFacultyName() {
-        return facultyName;
+    public FacultyNames getName() {
+        return name;
     }
 
-    public void setFacultyName(FacultyNames facultyName) {
-        this.facultyName = facultyName;
+    public void setName(FacultyNames name) {
+        this.name = name;
     }
 
     public List<Group> getGroups() {
@@ -33,11 +33,11 @@ public class Faculty {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Faculty faculty = (Faculty) o;
-        return facultyName == faculty.facultyName && Objects.equals(groups, faculty.groups);
+        return name == faculty.name && Objects.equals(groups, faculty.groups);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(facultyName, groups);
+        return Objects.hash(name, groups);
     }
 }

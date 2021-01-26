@@ -10,17 +10,18 @@ import java.util.Random;
 
 public class TaskOne {
     private static final Random RANDOM = new Random();
+    private static final String OUT_FILE_PATH = "src\\main\\java\\javaio\\data";
 
     public static void main(String[] args) {
-        if (!new File("src/main/java/javaio/data").exists()) {
+        if (!new File(OUT_FILE_PATH).exists()) {
             try {
-                Files.createDirectories(Paths.get("src/main/java/javaio/data"));
+                Files.createDirectories(Paths.get(OUT_FILE_PATH));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Created a new directory: src\\main\\java\\javaio\\data");
+            System.out.println("Created a new directory: " + OUT_FILE_PATH);
         }
-        File numbersFile = new File("src/main/java/javaio/data" + File.separator + "numbers.txt");
+        File numbersFile = new File(OUT_FILE_PATH + File.separator + "numbers.txt");
         try {
             if (numbersFile.createNewFile()) {
                 System.out.println("File created: " + numbersFile.getPath());

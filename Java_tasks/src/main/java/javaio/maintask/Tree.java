@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Tree {
+    private static final String OUT_FILE_PATH = "src\\main\\java\\javaio\\data";
+
     public static void main(String[] args) throws IOException {
         String inputArgs = Arrays.toString(args)
                 .replace("[", "")
@@ -24,11 +26,11 @@ public class Tree {
             System.out.println("It's a directory path.");
             CustomFileVisitor customFileVisitor = new CustomFileVisitor(inputPath);
             Files.walkFileTree(inputPath, customFileVisitor);
-            if (!new File("src/main/java/javaio/data").exists()) {
-                Files.createDirectories(Paths.get("src/main/java/javaio/data"));
-                System.out.println("Created a new directory: src\\main\\java\\javaio\\data");
+            if (!new File(OUT_FILE_PATH).exists()) {
+                Files.createDirectories(Paths.get(OUT_FILE_PATH));
+                System.out.println("Created a new directory: " + OUT_FILE_PATH);
             }
-            File outputResult = new File("src/main/java/javaio/data" + File.separator + "tree.txt");
+            File outputResult = new File(OUT_FILE_PATH + File.separator + "tree.txt");
 
             try (FileWriter fileWriter = new FileWriter(outputResult)) {
                 fileWriter.write(CustomFileVisitor.output);

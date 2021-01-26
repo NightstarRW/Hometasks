@@ -76,7 +76,7 @@ public class Runner {
             Validator.groupsValidation(UniversityService.getAllGroups(UNIVERSITY));
             Validator.facultyValidation(UNIVERSITY.getFaculties());
             Validator.universityValidation(UNIVERSITY);
-        } catch (NullPointerException e) {
+        } catch (RuntimeException e) {
             e.printStackTrace();
         }
 
@@ -88,35 +88,45 @@ public class Runner {
                 System.out.println("Enter student id: ");
                 int studentId = SCANNER.nextInt();
                 for (Student student : UniversityService.getAllStudents(UNIVERSITY)) {
-                    if (student.getStudentId() == studentId) {
-                        UniversityService.calculateAndPrintStudentAverageGrade(student);
+                    if (student.getId() == studentId) {
+                        System.out.println("Student Id: " + student.getId() +
+                                ", Student name: " + student.getFirstName() +
+                                ", average grade: " + UniversityService.calculateStudentAverageGrade(student));
                     }
                 }
                 break;
             case 2:
                 System.out.println("Enter the faculty: ");
                 Enum<FacultyNames> facultyName = FacultyNames.valueOf(SCANNER.next());
-                for (Faculty faculty : UNIVERSITY.getFaculties())
-                    if (faculty.getFacultyName().equals(facultyName)) {
-                        System.out.println("Enter the group number: ");
-                        int groupNumber = SCANNER.nextInt();
-                        for (Group group : faculty.getGroups()) {
-                            if (group.getGroupNumber() == groupNumber) {
-                                System.out.println("Enter the discipline: ");
-                                DisciplineNames discipline = DisciplineNames.valueOf(SCANNER.next());
-                                UniversityService.calculateAndPrintGroupAverageGrade(group, discipline);
-                            }
-                        }
-                    }
+                foundExactGroupAndDiscipline(facultyName);
                 break;
             case 3:
                 System.out.println("Enter the discipline: ");
                 DisciplineNames discipline = DisciplineNames.valueOf(SCANNER.next());
-                UniversityService.calculateAndPrintAverageGradeByUniversity(UniversityService
-                        .getAllStudents(UNIVERSITY), discipline);
+                System.out.println("Average grade: " +
+                        UniversityService.calculateAverageGradeByUniversity(UniversityService.
+                                getAllStudents(UNIVERSITY), discipline));
                 break;
             default:
                 throw new IllegalArgumentException("Number must be from 1 to 3!");
         }
     }
+
+    private static void foundExactGroupAndDiscipline(Enum<FacultyNames> facultyName) {
+        for (Faculty faculty : UNIVERSITY.getFaculties()) {
+            if (faculty.getName().equals(facultyName)) {
+                System.out.println("Enter the group number: ");
+                int groupNumber = SCANNER.nextInt();
+                for (Group group : faculty.getGroups()) {
+                    if (group.getNumber() == groupNumber) {
+                        System.out.println("Enter the discipline: ");
+                        DisciplineNames discipline = DisciplineNames.valueOf(SCANNER.next());
+                        System.out.println("Average grade: " +
+                                UniversityService.calculateGroupAverageGrade(group, discipline));
+                    }
+                }
+            }
+        }
+    }
+
 }

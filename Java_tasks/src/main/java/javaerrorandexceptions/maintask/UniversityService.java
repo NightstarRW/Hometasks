@@ -24,17 +24,16 @@ public class UniversityService {
         return allGroups;
     }
 
-    public static void calculateAndPrintStudentAverageGrade(Student student) {
+    public static double calculateStudentAverageGrade(Student student) {
         double average = 0;
         for (Integer value : student.getGrades().values()) {
             average += value;
         }
         average /= student.getGrades().size();
-        System.out.println("Student Id: " + student.getStudentId() + ", Student name: " + student.getFirstName()
-                + ", average grade: " + average);
+        return average;
     }
 
-    public static void calculateAndPrintGroupAverageGrade(Group group, DisciplineNames discipline) {
+    public static double calculateGroupAverageGrade(Group group, DisciplineNames discipline) {
         double average = 0;
         int count = 0;
         for (Student student : group.getStudents()) {
@@ -44,10 +43,10 @@ public class UniversityService {
             }
         }
         average /= count;
-        System.out.println("Average grade: " + average);
+        return average;
     }
 
-    public static void calculateAndPrintAverageGradeByUniversity(List<Student> students, DisciplineNames discipline) {
+    public static double calculateAverageGradeByUniversity(List<Student> students, DisciplineNames discipline) {
         double average = 0;
         int count = 0;
         for (Student student : students) {
@@ -57,6 +56,6 @@ public class UniversityService {
             }
         }
         average /= count;
-        System.out.println("Average grade: " + average);
+        return average;
     }
 }

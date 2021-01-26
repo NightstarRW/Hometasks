@@ -1,9 +1,10 @@
 package javaerrorandexceptions.maintask;
 
-import javaerrorandexceptions.maintask.entity.Student;
 import javaerrorandexceptions.maintask.entity.Faculty;
 import javaerrorandexceptions.maintask.entity.Group;
+import javaerrorandexceptions.maintask.entity.Student;
 import javaerrorandexceptions.maintask.entity.University;
+import javaerrorandexceptions.maintask.entity.exception.*;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class Validator {
     public static void disciplinesValidation(List<Student> students) {
         for (Student student : students) {
             if (student.getGrades().isEmpty()) {
-                throw new NullPointerException("Student has no disciplines! Student Id: " + student.getStudentId());
+                throw new GradesNotFoundException("Student has no disciplines! Student Id: " + student.getId());
             }
         }
     }
@@ -30,7 +31,7 @@ public class Validator {
     public static void groupsValidation(List<Group> groups) {
         for (Group group : groups) {
             if (group.getStudents().isEmpty()) {
-                throw new NullPointerException("Group are empty! Group number: " + group.getGroupNumber());
+                throw new StudentsNotFountException("Group are empty! Group number: " + group.getNumber());
             }
         }
     }
@@ -38,14 +39,14 @@ public class Validator {
     public static void facultyValidation(List<Faculty> faculties) {
         for (Faculty faculty : faculties) {
             if (faculty.getGroups().isEmpty()) {
-                throw new NullPointerException("Faculty contains no groups! Faculty name: " + faculty.getFacultyName());
+                throw new GroupsNotFoundException("Faculty contains no groups! Faculty name: " + faculty.getName());
             }
         }
     }
 
     public static void universityValidation(University university) {
         if (university.getFaculties().isEmpty()) {
-            throw new NullPointerException("University contains no faculties!");
+            throw new FacultiesNotFoundException("University contains no faculties!");
         }
     }
 }

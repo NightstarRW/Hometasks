@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class Group {
     List<Student> students;
-    private int groupNumber;
+    private int number;
     private int course;
 
-    public Group(List<Student> students, int groupNumber, int course) {
+    public Group(List<Student> students, int number, int course) {
         this.students = students;
-        this.groupNumber = groupNumber;
+        this.number = number;
         this.course = course;
     }
 
@@ -22,12 +22,12 @@ public class Group {
         this.students = students;
     }
 
-    public int getGroupNumber() {
-        return groupNumber;
+    public int getNumber() {
+        return number;
     }
 
-    public void setGroupNumber(int groupNumber) {
-        this.groupNumber = groupNumber;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public int getCourse() {
@@ -43,12 +43,12 @@ public class Group {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
-        return groupNumber == group.groupNumber && course == group.course && students.equals(group.students);
+        return number == group.number && course == group.course && students.equals(group.students);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(students, groupNumber, course);
+        return Objects.hash(students, number, course);
     }
 
 }

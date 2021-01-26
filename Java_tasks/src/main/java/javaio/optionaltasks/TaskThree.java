@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TaskThree {
+    private static final String OUT_FILE_PATH = "src\\main\\java\\javaio\\data";
+
     public static void main(String[] args) {
         System.out.println("Enter '.java' file path: ");
         Path javaFilePath = Paths.get(new Scanner(System.in).next());
@@ -19,15 +21,15 @@ public class TaskThree {
         if (!javaFile.isFile() || !javaFile.getName().endsWith(".java")) {
             throw new InvalidPathException(javaFilePath.toString(), "It's not a '.java' file");
         }
-        if (!new File("src/main/java/javaio/data").exists()) {
+        if (!new File(OUT_FILE_PATH).exists()) {
             try {
-                Files.createDirectories(Paths.get("src/main/java/javaio/data"));
+                Files.createDirectories(Paths.get(OUT_FILE_PATH));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Created a new directory: src\\main\\java\\javaio\\data");
+            System.out.println("Created a new directory: " + OUT_FILE_PATH);
         }
-        File reversedJavaContent = new File("src/main/java/javaio/data/reversed.txt");
+        File reversedJavaContent = new File(OUT_FILE_PATH + "/reversed.txt");
         List<String> fileContent = new ArrayList<>();
         List<String> reversedFileContent = new ArrayList<>();
 
