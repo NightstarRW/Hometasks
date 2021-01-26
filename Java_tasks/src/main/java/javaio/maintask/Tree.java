@@ -40,18 +40,19 @@ public class Tree {
         } else if (inputtedFile.isFile() && inputtedFile.getName().endsWith(".txt")) {
             System.out.println("It's a file path\n");
             List<String> fileContent = Files.readAllLines(inputPath, Charset.defaultCharset());
-            countingAndPrint(fileContent);
+            countingAndPrintDirData(fileContent);
         } else {
             throw new InvalidPathException(inputArgs, "It's not a path, or '.txt' file!");
         }
     }
 
-    private static void countingAndPrint(List<String> strings) {
-        int packagesCounter = 0;
+    private static void countingAndPrintDirData(List<String> strings) {
+        int packagesCounter = 1;
         int filesCounter = 0;
         int fileNameLength = 0;
         int filesInPackageCounter;
 
+        packagesCounter--;
         for (String string : strings) {
             if (string.contains("|--")) {
                 packagesCounter++;
@@ -61,7 +62,7 @@ public class Tree {
             }
         }
         fileNameLength /= filesCounter;
-        filesInPackageCounter = filesCounter / (packagesCounter + 1);
+        filesInPackageCounter = filesCounter / packagesCounter;
 
         System.out.println("Packages quantity: " + packagesCounter + "\nFiles quantity: " + filesCounter +
                 "\nAverage filenames length: " + fileNameLength + "\nAverage files quantity in package: "
