@@ -2,13 +2,9 @@ package test;
 
 import driver.DriverSingleton;
 import model.ComputeEngine;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -20,7 +16,6 @@ import service.ComputeEngineCreator;
 import util.StringUtil;
 import util.TestListener;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +28,6 @@ public class CalculatorMailTest {
     //mvn -Dbrowser=chrome -Denvironment=machineone -Dsurefire.suiteXmlFiles=src\test\resources\testng-smoke.xml -Dtestng.dtd.http=true clean test
     @BeforeTest
     private void initBrowser() {
-        System.setProperty("browser", "chrome");
         driver = DriverSingleton.getDriver();
     }
 
