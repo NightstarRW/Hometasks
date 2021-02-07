@@ -1,9 +1,6 @@
 package page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,6 +12,9 @@ public class MailPage extends AbstractPage {
 
     public MailPage openMailPage() {
         driver.get("https://10minutemail.com/");
+        new WebDriverWait(driver, 20).until(
+                driver -> ((JavascriptExecutor) driver).
+                        executeScript("return document.readyState").equals("complete"));
         return this;
     }
 

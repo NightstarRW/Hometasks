@@ -16,7 +16,7 @@ public abstract class AbstractPage {
     }
 
     protected void waitForElementIsClickableAndClickOnIt(By selector) {
-        WebElement element = new WebDriverWait(driver, 5).until(ExpectedConditions
+        WebElement element = new WebDriverWait(driver, 10).until(ExpectedConditions
                 .elementToBeClickable(selector));
         element.click();
     }
