@@ -67,19 +67,6 @@ public class CalculatorMailTest {
         driver = null;
     }
 
-    @AfterTest(alwaysRun = true)
-    private void takeScreenshot(ITestResult result) {
-        if (ITestResult.FAILURE == result.getStatus()) {
-            try {
-                TakesScreenshot screenshot = (TakesScreenshot) driver;
-                File scr = screenshot.getScreenshotAs(OutputType.FILE);
-                FileUtils.copyFile(scr, new File("D://" + result.getName() + ".png"));
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        }
-    }
-
     private CalculatorPage searchForCalculator() {
         return new CloudHomePage(driver)
                 .openPage(HOME_PAGE_URL)
