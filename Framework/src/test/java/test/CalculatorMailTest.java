@@ -5,8 +5,8 @@ import model.ComputeEngine;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import page.CalculatorPage;
@@ -21,12 +21,11 @@ import java.util.List;
 
 @Listeners({TestListener.class})
 public class CalculatorMailTest {
-    private final static String HOME_PAGE_URL = "https://cloud.google.com/";
+    private final static String CLOUD_HOME_PAGE_URL = "https://cloud.google.com/";
     private final static String SEARCH_TERM = "Google Cloud Platform Pricing Calculator";
     private WebDriver driver;
 
-    //mvn -Dbrowser=chrome -Denvironment=machineone -Dsurefire.suiteXmlFiles=src\test\resources\testng-smoke.xml -Dtestng.dtd.http=true clean test
-    @BeforeTest
+    @BeforeClass
     private void initBrowser() {
         driver = DriverSingleton.getDriver();
     }
@@ -44,18 +43,17 @@ public class CalculatorMailTest {
         MailPage mailPage = new MailPage(driver);
         mailPage.openMailPage().copyEmailAddress();
 
-        driver.switchTo().window(browserTabList.get(0))
-                .switchTo().frame(0)
-                .switchTo().frame("myFrame");
-        calculatorPage.initEmailEstimate().pasteEmailAddress().sendMessageToEmail();
+        driver.switchTo().window(browserTabList.get(0));
+        calculatorPage.switchToCalculatorFrame()
+                .initEmailEstimate().pasteEmailAddress().sendMessageToEmail();
         driver.switchTo().window(browserTabList.get(1));
         mailPage.waitForMessageAndOpenIt(120);
-        double currentMailCost = StringUtil.getDoubleValueFromString(mailPage.getCostFromMessage(), false);
+        double currentMailCost = StringUtil.getDoubleValueFromString(mailPage.getCostFromMessage());
 
         Assert.assertEquals(currentMailCost, currentSiteCost);
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     private void tearDown() {
         DriverSingleton.closeDriver();
         driver = null;
@@ -63,7 +61,7 @@ public class CalculatorMailTest {
 
     private CalculatorPage searchForCalculator() {
         return new CloudHomePage(driver)
-                .openPage(HOME_PAGE_URL)
+                .openPage(CLOUD_HOME_PAGE_URL)
                 .searchForTerm(SEARCH_TERM)
                 .goToTheFirstSearchResult();
     }

@@ -21,63 +21,58 @@ public class CalculatorPage extends AbstractPage {
 
     public CalculatorPage enterNumberOfInstances(String number) {
         WebElement input = new WebDriverWait(driver, 5).until(ExpectedConditions.
-                presenceOfElementLocated(By.id("input_63")));
+                presenceOfElementLocated(By.xpath("//*[contains(text(), 'Number of instances')]/../input")));
         input.sendKeys(String.valueOf(number));
         return this;
     }
 
     public CalculatorPage selectMachineType(String type) {
-        waitForElementIsClickableAndClickOnIt(By.id("select_value_label_60"));
+        scrollToElement(driver.findElement(By.xpath("//*[contains(text(), 'Machine type')]/..//md-select-value")));
+        waitForElementIsClickableAndClickOnIt(By.xpath("//*[contains(text(), 'Machine type')]/..//md-select-value"));
         waitForElementIsClickableAndClickOnIt(By.xpath("//div[contains(text(), '" + type + "')]"));
         return this;
     }
 
     public CalculatorPage enterNumberOfNodes(String number) {
         WebElement input = new WebDriverWait(driver, 5).until(ExpectedConditions.
-                presenceOfElementLocated(By.id("input_105")));
+                presenceOfElementLocated(By.xpath("//*[contains(text(), 'Number of nodes')]/../input")));
         input.sendKeys(String.valueOf(number));
         return this;
     }
 
     public CalculatorPage addGPUs(String numberOfGPUs) {
+        scrollToElement(driver.findElement(By.xpath("//div[contains(text(), 'Add GPUs')]/..")));
         waitForElementIsClickableAndClickOnIt(By.xpath("//div[contains(text(), 'Add GPUs')]/.."));
-        waitForElementIsClickableAndClickOnIt(By.xpath("//*[@id='select_value_label_352']/span[1]"));
+        waitForElementIsClickableAndClickOnIt(By.xpath("//*[contains(text(), 'Number of GPUs')]/..//md-select-value"));
         waitForElementIsClickableAndClickOnIt(By
                 .xpath("//md-option[@value='" + numberOfGPUs + "'][@ng-value='item.value']"));
         return this;
     }
 
     public CalculatorPage selectGPUsType(String typeOfGPU) {
-        waitForElementIsClickableAndClickOnIt(By.xpath("//*[@id='select_value_label_353']/span[1]"));
-        WebElement typeGPUBox = driver.findElement(By.xpath("//div[contains(text(), '" + typeOfGPU + "')]/../../.."));
-        WebElement gpu = new WebDriverWait(driver, 5).
-                until(ExpectedConditions.elementToBeClickable(typeGPUBox.
-                        findElement(By.xpath("//*[@id='select_option_364']"))));
-        gpu.click();
+        scrollToElement(driver.findElement(By.xpath("//*[contains(text(), 'GPU type')]/..//md-select-value")));
+        waitForElementIsClickableAndClickOnIt(By.xpath("//*[contains(text(), 'GPU type')]/..//md-select-value"));
+        waitForElementIsClickableAndClickOnIt(By.xpath("//div[contains(text(), '" + typeOfGPU + "')]/.."));
         return this;
     }
 
     public CalculatorPage addLocalSSD() {
-        waitForElementIsClickableAndClickOnIt(By.xpath("//*[@id='select_value_label_102']/span[1]"));
-        WebElement ssdBox = driver.findElement(By.xpath("//*[@id='select_container_119']/md-select-menu/md-content"));
-        WebElement ssd = new WebDriverWait(driver, 5).until(ExpectedConditions
-                .elementToBeClickable(ssdBox.findElement(By.xpath("//div[contains(text(), '24x375')]/.."))));
-        ssd.click();
+        scrollToElement(driver.findElement(By.xpath("//*[contains(text(), 'Local SSD')]/..//md-select-value")));
+        waitForElementIsClickableAndClickOnIt(By.xpath("//*[contains(text(), 'Local SSD')]/..//md-select-value"));
+        waitForElementIsClickableAndClickOnIt(By.xpath("//div[contains(text(), '24x375')]/.."));
         return this;
     }
 
     public CalculatorPage selectDatacenterLocation(String location) {
-        waitForElementIsClickableAndClickOnIt(By.xpath("//*[@id='select_value_label_103']/span[1]"));
-        WebElement datacenterBox = driver.findElement(By.id("select_container_121"));
-        WebElement datacenter = new WebDriverWait(driver, 5).until(ExpectedConditions
-                .elementToBeClickable(datacenterBox.
-                        findElement(By.xpath("(//md-option/div[contains(text(), '" + location + "')])[3]"))));
-        datacenter.click();
+        scrollToElement(driver.findElement(By.xpath("(//*[contains(text(), 'Datacenter location')]/..//md-select-value)[2]")));
+        waitForElementIsClickableAndClickOnIt(By.xpath("(//*[contains(text(), 'Datacenter location')]/..//md-select-value)[2]"));
+        waitForElementIsClickableAndClickOnIt(By.xpath("(//md-option/div[contains(text(), '" + location + "')])[3]"));
         return this;
     }
 
     public CalculatorPage selectCommittedUsage(String usageYears) {
-        waitForElementIsClickableAndClickOnIt(By.xpath("//*[@id='select_value_label_104']/span[1]"));
+        scrollToElement(driver.findElement(By.xpath("(//*[contains(text(), 'Committed usage')]/..//md-select-value)[2]")));
+        waitForElementIsClickableAndClickOnIt(By.xpath("(//*[contains(text(), 'Committed usage')]/..//md-select-value)[2]"));
         waitForElementIsClickableAndClickOnIt(By
                 .xpath("//div[@id='select_container_126']//md-option[@value='" + usageYears + "']"));
         return this;
@@ -120,6 +115,7 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public CalculatorPage sendMessageToEmail() {
+        scrollToElement(driver.findElement(By.xpath("//button[contains(text(), 'Send Email')]")));
         waitForElementIsClickableAndClickOnIt(By.xpath("//button[contains(text(), 'Send Email')]"));
         return this;
     }

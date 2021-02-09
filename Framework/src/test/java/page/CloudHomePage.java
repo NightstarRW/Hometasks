@@ -8,8 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class CloudHomePage {
-    private final WebDriver driver;
+public class CloudHomePage extends AbstractPage {
 
     @FindBy(name = "q")
     private WebElement searchField;
