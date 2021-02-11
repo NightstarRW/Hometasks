@@ -12,7 +12,7 @@ public class CalculatorPage extends AbstractPage {
     public CalculatorPage(WebDriver driver) {
         this.driver = driver;
     }
-
+//TODO BY goes here
     public CalculatorPage switchToCalculatorFrame() {
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
