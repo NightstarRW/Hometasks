@@ -1,19 +1,19 @@
 package util;
 
-import org.apache.tools.ant.util.StringUtils;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtil {
 
-    public static double getDoubleValueFromString(String string, boolean removeMonth) {
-        String buffer = string.replaceAll("[^1234567890.]", "");
-        if (removeMonth) {
-            buffer = StringUtils.removeSuffix(buffer, "1");
+    public static double getDoubleValueFromString(String input) {
+        Pattern pattern = Pattern.compile("\\d+[,]?\\d+[.]\\d+");
+        Matcher matcher = pattern.matcher(input);
+        String output;
+        if (matcher.find()) {
+            output = matcher.group(0);
+        } else {
+            throw new CantFoundEstimateCost("Can't found a double value from string");
         }
-        return Double.parseDouble(buffer);
-    }
-
-    public static double getDoubleValueFromString(String string) {
-        String buffer = string.replaceAll("[^1234567890.]", "");
-        return Double.parseDouble(buffer);
+        return Double.parseDouble(output.replace(",", ""));
     }
 }

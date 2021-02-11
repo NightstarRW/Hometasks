@@ -34,8 +34,7 @@ public class CalculatorMailTest {
     public void testIsSiteCostEqualToMailMessageCost() {
         CalculatorPage calculatorPage = searchForCalculator();
         fillCalculatingData(calculatorPage);
-        double currentSiteCost = StringUtil.getDoubleValueFromString(calculatorPage.
-                getTotalEstimatedCost(), true);
+        double currentSiteCost = StringUtil.getDoubleValueFromString(calculatorPage.getTotalEstimatedCost());
 
         ((JavascriptExecutor) driver).executeScript("window.open()");
         List<String> browserTabList = new ArrayList<>(driver.getWindowHandles());

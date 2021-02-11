@@ -20,4 +20,11 @@ public abstract class AbstractPage {
                 .elementToBeClickable(selector));
         element.click();
     }
+
+    protected void scrollAndClickOnElement(By selector) {
+        WebElement element = new WebDriverWait(driver, 10).until(ExpectedConditions
+                .elementToBeClickable(selector));
+        scrollToElement(element);
+        element.click();
+    }
 }
