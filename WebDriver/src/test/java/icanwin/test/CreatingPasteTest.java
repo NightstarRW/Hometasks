@@ -3,6 +3,7 @@ package icanwin.test;
 import icanwin.page.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,13 +22,18 @@ public class CreatingPasteTest {
 
     @Test
     public void testCreatingNewPaste() {
-        new HomePage(driver)
-                .openPage(PASTEBIN_URL)
+        HomePage homePage = new HomePage(driver);
+        homePage.openPage(PASTEBIN_URL)
                 .enterPasteName(PASTE_NAME)
                 .enterPasteCode(PASTE_CODE)
                 .setPasteExpirationOnTenMinutes()
                 .createPaste();
         System.out.println("\nResult Url: " + driver.getCurrentUrl());
+        try {
+            Class.forName("icanwin.page.HomePage");
+        } catch (ClassNotFoundException e) {
+            Assert.fail("Can't create a paste!");
+        }
     }
 
     @AfterMethod(alwaysRun = true)

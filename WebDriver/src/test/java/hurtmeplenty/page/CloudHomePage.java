@@ -19,7 +19,7 @@ public class CloudHomePage {
         PageFactory.initElements(driver, this);
     }
 
-    public CloudHomePage openPage(String url) {
+    public CloudHomePage open(String url) {
         driver.get(url);
         return this;
     }

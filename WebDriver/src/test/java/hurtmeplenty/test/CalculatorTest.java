@@ -5,8 +5,8 @@ import hurtmeplenty.page.CloudHomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class CalculatorTest {
@@ -18,7 +18,7 @@ public class CalculatorTest {
     private static final String EXPECTED_COST = "Total Estimated Cost: USD 15,723.19 per 1 month";
     private WebDriver driver;
 
-    @BeforeTest
+    @BeforeClass
     private void initBrowser() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -31,7 +31,7 @@ public class CalculatorTest {
         Assert.assertEquals(calculatorPage.getTotalEstimatedCost(), EXPECTED_COST);
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     private void tearDown() {
         driver.quit();
         driver = null;
@@ -39,7 +39,7 @@ public class CalculatorTest {
 
     private CalculatorPage searchForCalculator() {
         return new CloudHomePage(driver)
-                .openPage(HOME_PAGE_URL)
+                .open(HOME_PAGE_URL)
                 .searchForTerm(SEARCH_TERM)
                 .goToTheFirstSearchResult();
     }

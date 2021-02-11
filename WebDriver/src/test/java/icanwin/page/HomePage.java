@@ -19,7 +19,7 @@ public class HomePage {
     private WebElement pasteCode;
 
     @FindBy(xpath = "//button[text()='Create New Paste']")
-    private WebElement createPasteBtn;
+    private WebElement createPasteButton;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -51,8 +51,8 @@ public class HomePage {
     }
 
     public HomePage createPaste() {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", createPasteBtn);
-        createPasteBtn.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", createPasteButton);
+        createPasteButton.click();
         new WebDriverWait(driver, 15).until(ExpectedConditions.
                 presenceOfElementLocated(By.className("info-bar")));
         return this;

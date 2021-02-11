@@ -13,7 +13,7 @@ public class MailPage extends AbstractPage {
         this.driver = driver;
     }
 
-    public MailPage openMailPage() {
+    public MailPage open() {
         driver.get("https://10minutemail.com/");
         return this;
     }

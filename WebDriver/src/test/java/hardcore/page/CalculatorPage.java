@@ -13,6 +13,11 @@ public class CalculatorPage extends AbstractPage {
         this.driver = driver;
     }
 
+    public CalculatorPage openCalculatorPage() {
+        driver.get("https://cloud.google.com/products/calculator/");
+        return this;
+    }
+
     public CalculatorPage switchToCalculatorFrame() {
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
@@ -34,21 +39,21 @@ public class CalculatorPage extends AbstractPage {
 
     public CalculatorPage enterNumberOfNodes(int number) {
         WebElement input = new WebDriverWait(driver, 5).until(ExpectedConditions.
-                presenceOfElementLocated(By.id("input_105")));
+                presenceOfElementLocated(By.xpath("//*[contains(text(), 'Number of nodes')]/..//input")));
         input.sendKeys(String.valueOf(number));
         return this;
     }
 
     public CalculatorPage addGPUs(int numberOfGPUs) {
         waitForElementIsClickableAndClickOnIt(By.xpath("//div[contains(text(), 'Add GPUs')]/.."));
-        waitForElementIsClickableAndClickOnIt(By.xpath("//*[@id='select_value_label_352']/span[1]"));
+        waitForElementIsClickableAndClickOnIt(By.xpath("//*[contains(text(), 'Number of GPUs')]/..//span[1]"));
         waitForElementIsClickableAndClickOnIt(By
                 .xpath("//md-option[@value='" + numberOfGPUs + "'][@ng-value='item.value']"));
         return this;
     }
 
     public CalculatorPage selectGPUsType(String typeOfGPU) {
-        waitForElementIsClickableAndClickOnIt(By.xpath("//*[@id='select_value_label_353']/span[1]"));
+        waitForElementIsClickableAndClickOnIt(By.xpath("//*[contains(text(), 'GPU type')]/..//span[1]"));
         WebElement typeGPUBox = driver.findElement(By.xpath("//div[contains(text(), '" + typeOfGPU + "')]/../../.."));
         WebElement gpu = new WebDriverWait(driver, 5).
                 until(ExpectedConditions.elementToBeClickable(typeGPUBox.

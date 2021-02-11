@@ -5,9 +5,7 @@ import bringiton.page.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class PastebinTests {
     private static final String HOMEPAGE_URL = "https://pastebin.com";
@@ -20,7 +18,7 @@ public class PastebinTests {
     private WebDriver driver;
     private CreatedPastePage createdPastePage;
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void initBrowserAndCreateANewPaste() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -29,23 +27,20 @@ public class PastebinTests {
 
     @Test
     public void testIsPasteNameEqualToExpected() {
-        String currentPasteName = createdPastePage.getPasteName();
-        Assert.assertEquals(currentPasteName, PASTE_NAME);
+        Assert.assertEquals(createdPastePage.getPasteName(), PASTE_NAME);
     }
 
     @Test
     public void testIsPasteSyntaxEqualToExpected() {
-        String currentPasteSyntax = createdPastePage.getPasteSyntax();
-        Assert.assertEquals(currentPasteSyntax, PASTE_SYNTAX);
+        Assert.assertEquals(createdPastePage.getPasteSyntax(), PASTE_SYNTAX);
     }
 
     @Test
     public void testIsPasteCodeEqualToExpected() {
-        String currentPasteCode = createdPastePage.getPasteCode();
-        Assert.assertEquals(currentPasteCode, PASTE_CODE);
+        Assert.assertEquals(createdPastePage.getPasteCode(), PASTE_CODE);
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         driver.quit();
         driver = null;

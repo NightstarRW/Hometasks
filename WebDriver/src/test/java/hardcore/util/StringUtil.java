@@ -11,4 +11,9 @@ public class StringUtil {
         }
         return Double.parseDouble(buffer);
     }
+
+    public static double getDoubleValueFromString(String string) {
+        String buffer = string.replaceAll("[^1234567890.]", "");
+        return Double.parseDouble(buffer);
+    }
 }
