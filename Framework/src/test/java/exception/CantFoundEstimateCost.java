@@ -1,4 +1,4 @@
-package util;
+package exception;
 
 public class CantFoundEstimateCost extends RuntimeException {
 
