@@ -85,7 +85,7 @@ public class CalculatorPage extends AbstractPage {
     public CalculatorPage selectCommittedUsage(String usageYears) {
         scrollAndClickOnElement(COMMITTED_USAGE_BOX);
         waitForElementIsClickableAndClickOnIt(By
-                .xpath("(//md-option[@value='" + usageYears + "'])[9]"));
+                .xpath("//div[@aria-hidden='false']//md-option[@value='" + usageYears + "']"));
         return this;
     }
 
