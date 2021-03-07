@@ -27,8 +27,6 @@ public class CalculatorMailTest {
 
     @BeforeClass
     private void initBrowser() {
-        System.setProperty("browser", "chrome");
-        System.setProperty("engine", "machineone");
         driver = DriverSingleton.getDriver();
     }
 
